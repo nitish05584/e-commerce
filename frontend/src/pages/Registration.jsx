@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { IoEyeOutline } from "react-icons/io5";
 
 import { IoEyeSharp } from "react-icons/io5";
+
 import { authDataContext } from '../context/AuthContext';
 
  import axios from 'axios'
@@ -25,12 +26,13 @@ const Registration = () => {
   const handleSignup=async(e)=>{
     e.preventDefault();
     try {
-      const result=await axios.post(serverUrl+'/api/auth/registration',{name,email,password},{withCredentials:true})
+      const result=await axios.post(serverUrl +'/api/auth/registration',{name,email,password},{withCredentials:true})
       console.log(result.data)
     } catch (error) {
       console.log(error)
     }
   }
+  
   return (
     <div className='w-screen h-screen bg-gradient-to-b from-[#141414] to-[#0c2025] text-white flex flex-col items-center justify-start'>
       

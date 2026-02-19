@@ -55,7 +55,7 @@ const login =async(req,res)=>{
     let {email,password}=req.body;
     let user=await User.findOne({email})
     if(!user){
-      return res.status(404).json({message:"User not found"})
+      return res.status(400).json({message:"User not found"})
     }
     let isMatch=await bcrypt.compare(password,user.password);
 
@@ -71,7 +71,7 @@ const login =async(req,res)=>{
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.status(201).json({ 
+    return res.status(200).json({ 
       user 
     });
 
@@ -84,7 +84,7 @@ const login =async(req,res)=>{
 const logout=async(req,res)=>{
   try {
     res.clearCookie("token")
-    return res.status(201).json({ 
+    return res.status(200).json({ 
       message:"logout successfully" 
     });
   } catch (error) {
