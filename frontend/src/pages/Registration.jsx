@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from "../assets/logo.png"
 import { useNavigate } from 'react-router-dom'
+
+import { IoEyeOutline } from "react-icons/io5";
+
+import { IoEyeSharp } from "react-icons/io5";
+
 const Registration = () => {
-  let navigate=useNavigate()
+  let navigate=useNavigate();
+  let [show,setShow]=useState(false);
   return (
     <div className='w-screen h-screen bg-gradient-to-b from-[#141414] to-[#0c2025] text-white flex flex-col items-center justify-start'>
       
@@ -39,7 +45,7 @@ const Registration = () => {
 
 
 
-             <div className='w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px] '>
+             <div className='w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px] relative '>
               <input type='text' className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold outline-none'placeholder='UserName'required/>
              
 
@@ -49,10 +55,15 @@ const Registration = () => {
               <input type='text' className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold outline-none'placeholder='Email'required/>
              
 
-
+               
 
              
-              <input type='password' className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold outline-none'placeholder='password'required/>
+              <input type={show?"text":"password"} className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold outline-none'placeholder='password'required/>
+
+            {!show && <IoEyeOutline className='w-[20] h-[20px] cursor-pointer absolute right-[5%] ' onClick={()=>setShow(prev=>!prev)}/>}
+
+                {show && <IoEyeSharp className='w-[20] h-[20px] cursor-pointer absolute right-[5%] 'onClick={()=>setShow(prev=>!prev)}/>}
+
              
              <button className='w-[100%] h-[50px] bg-[#6060f5] rounded-lg flex items-center justify-center mt-[20px] text-[17px] font-semibold'> Create Account</button>
              <p className='flex gap-[10px]'>you have any account?<span className='text-[#5555f6cf] text-[17px] font-semibold cursor-pointer'onClick={()=>navigate("/login")}>Login</span></p>
