@@ -9,6 +9,8 @@ import { IoEyeSharp } from "react-icons/io5";
 import { authDataContext } from '../context/AuthContext';
 
 import axios from 'axios';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../utils/Firebase';
 
 
 const Login = () => {
@@ -27,6 +29,22 @@ const Login = () => {
     try {
       const result=await axios.post(serverUrl +'/api/auth/login',{email,password},{withCredentials:true})
       console.log(result.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
+   const googleLogin=async()=>{
+    try {
+      const response=await signInWithPopup(auth,provider)
+      let user=response.user
+      let name=user.displayName;
+      let email=user.email
+      const result=await axios.post(serverUrl+"/api/auth/googlelogin",{name,email},{withCredentials:true})
+      console.log(result.data)
+
     } catch (error) {
       console.log(error)
     }
@@ -55,7 +73,7 @@ const Login = () => {
           <form onSubmit={handleSignin} className='w-[90%] h-[90%]  flex flex-col itens-center justify-start gap-[20px] '>
 
            
-           <div className='w-[90%]h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] py-[20px] cursor-pointer '>
+           <div className='w-[90%]h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] py-[20px] cursor-pointer 'onClick={googleLogin}>
             <img src="https://png.pngtree.com/png-clipart/20230916/original/pngtree-google-logo-vector-png-image_12256710.png" alt="" className='w-[20px]'/>Login account with Google
            </div>
 
