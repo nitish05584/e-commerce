@@ -13,8 +13,7 @@ function UserContext({children}) {
         let result=await axios.post(serverUrl+"/api/user/getcurrentuser", {}, {withCredentials:true})
 
         setUserData(result.data);
-            
-        console.log(result.data);
+       
 
         } catch (error) {
            setUserData(null);

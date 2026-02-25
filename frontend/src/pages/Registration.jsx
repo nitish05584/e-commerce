@@ -11,6 +11,7 @@ import { authDataContext } from '../context/AuthContext';
  import axios from 'axios'
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../utils/Firebase';
+import { userDataContext } from '../context/UserContext';
 
 const Registration = () => {
   let navigate=useNavigate();
@@ -25,11 +26,15 @@ const Registration = () => {
 
   let [password,setPassword]=useState("")
 
+  let {getCurrentUser}=useContext(userDataContext)
+
   const handleSignup=async(e)=>{
     e.preventDefault();
     try {
       const result=await axios.post(serverUrl +'/api/auth/registration',{name,email,password},{withCredentials:true})
-      console.log(result.data)
+      
+      getCurrentUser();
+      navigate("/")
     } catch (error) {
       console.log(error)
     }

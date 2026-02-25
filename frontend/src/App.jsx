@@ -3,10 +3,12 @@ import { Route, Routes } from 'react-router-dom'
 import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import Nav from './component/Nav'
 
 const App = () => {
   return (
-    <div>
+    <>
+    <Nav/>
       <Routes>
         <Route path='/' element={<Home/>} />
 
@@ -15,7 +17,7 @@ const App = () => {
           <Route path='/signup' element={<Registration/>} />
         
       </Routes>
-    </div>
+    </>
   )
 }
 

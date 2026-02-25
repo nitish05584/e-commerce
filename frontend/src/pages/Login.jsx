@@ -32,6 +32,8 @@ const Login = () => {
     try {
       const result=await axios.post(serverUrl +'/api/auth/login',{email,password},{withCredentials:true})
       console.log(result.data)
+      getCurrentUser()
+      navigate("/");
     } catch (error) {
       console.log(error)
     }
