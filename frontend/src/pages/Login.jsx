@@ -11,6 +11,7 @@ import { authDataContext } from '../context/AuthContext';
 import axios from 'axios';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../utils/Firebase';
+import { userDataContext } from '../context/UserContext';
 
 
 const Login = () => {
@@ -23,6 +24,8 @@ const Login = () => {
   let [email,setEmail]=useState("")
   
   let [password,setPassword]=useState("")
+
+  let {getCurrentUser}=useContext(userDataContext)
 
    const handleSignin=async(e)=>{
     e.preventDefault();
