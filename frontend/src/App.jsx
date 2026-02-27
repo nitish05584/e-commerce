@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Nav from './component/Nav'
+import { userDataContext } from './context/UserContext'
+
 
 const App = () => {
+  let {userData}=useContext(userDataContext)
   return (
     <>
-    <Nav/>
+    {userData && <Nav/>}
       <Routes>
         <Route path='/' element={<Home/>} />
 
