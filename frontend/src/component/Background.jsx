@@ -15,7 +15,7 @@ function Background({heroCount}) {
     }
 
      else if(heroCount==3){
-   return <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC0DG16macP5YOaHekTcdibv-jwI-R7jpS4Q&s"alt="" className='w-[60%] h-[100%] float-right overflow-auto object-cover mb-3'/>
+   return <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC0DG16macP5YOaHekTcdibv-jwI-R7jpS4Q&s"alt="" className='w-[60%] h-[100%] float-right overflow-auto object-cover '/>
     }
   
 }
