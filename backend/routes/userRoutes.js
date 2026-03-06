@@ -1,12 +1,17 @@
 const express = require('express');
 const isAuth = require('../middleware/isAuth');
-const getCurrentUser = require('../controller/userController');
+const { getCurrentUser, getAdmin } = require('../controller/userController');
+
+const adminAuth = require('../middleware/adminAuth');
+
 
 
 
 const userRoutes = express.Router();
 
-userRoutes.post("/getcurrentuser",isAuth,getCurrentUser)
+userRoutes.get("/getcurrentuser",isAuth,getCurrentUser)
+
+userRoutes.get("/getadmin",adminAuth,getAdmin)
 
 
 

@@ -5,11 +5,14 @@ import Add from './pages/Add'
 import Lists from './pages/Lists'
 import Orders from './pages/Orders'
 import Login from './pages/Login'
+import { useContext } from 'react'
+import { adminDataContext } from './context/AdminContext'
 
 const App = () => {
+  let {adminData} = useContext(adminDataContext)
   return (
     <>
-    <Routes>
+   {!adminData ?<Login/>:<> <Routes>
     
     <Route path='/' element={<Home/>}/>
 
@@ -22,6 +25,7 @@ const App = () => {
         <Route path='/login' element={<Login/>}/>
   
     </Routes>
+    </>}
     </>
   )
 }

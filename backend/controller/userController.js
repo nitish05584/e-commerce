@@ -14,4 +14,19 @@ const getCurrentUser=async(req,res)=>{
     }
 }
 
-module.exports=getCurrentUser
+const getAdmin = async (req, res) => {
+  try {
+    let adminEmail = req.adminEmail;
+
+    if (!adminEmail) {
+      return res.status(404).json({ message: "admin is not found" });
+    }
+
+    return res.status(200).json({ email: adminEmail, role: "admin" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "getAdmin   Error" });
+  }
+};
+
+module.exports={getCurrentUser,getAdmin}

@@ -12,4 +12,17 @@ const genToken=async(userId)=>{
       console.log(error)  
     }  
 }
-module.exports=genToken;
+
+
+
+const genToken1=async(email)=>{
+    try {
+        let token=await jwt.sign({email},process.env.JWT_SECRET,{expiresIn:"7d"});
+
+        return token;
+
+    } catch (error) {
+      console.log(error)  
+    }  
+}
+module.exports={ genToken,genToken1};  
