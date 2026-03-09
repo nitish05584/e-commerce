@@ -13,6 +13,8 @@ const connectDB = require('./config/db');
 const authRouter = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+const productRoutes = require('./routes/productRoutes');
+
 
 
 
@@ -46,7 +48,7 @@ app.use('/api/auth',authRouter)
 
 app.use('/api/user',userRoutes)
 
-
+app.use('api/product',productRoutes)
 
 
 
