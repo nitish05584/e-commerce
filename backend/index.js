@@ -48,7 +48,7 @@ app.use('/api/auth',authRouter)
 
 app.use('/api/user',userRoutes)
 
-app.use('api/product',productRoutes)
+app.use('/api/product',productRoutes)
 
 
 
