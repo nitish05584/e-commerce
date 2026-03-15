@@ -38,7 +38,27 @@ const addProduct=async(req,res)=>{
 }
 
 
-module.exports=
-{addProduct
-    
+const listProduct=async(req,res)=>{
+    try {
+        const product=await Product.find({})
+        res.status(200).json(product);
+        
+    } catch (error) {
+        console.log("ListProduct error")
+        res.status(500).json({message:"ListProduct  error",error})
+    }
 }
+
+const removeProduct=async(req,res)=>{
+    try {
+       let {id}=req.params;
+       const product=await Product.findByIdAndDelete(id);
+       res.status(200).json({message:"Product removed successfully",product}) 
+    } catch (error) {
+        console.log("RemoveProduct error")
+        res.status(500).json({message:"RemoveProduct  error",error})
+    }
+}
+
+
+module.exports= {addProduct,listProduct,removeProduct}
