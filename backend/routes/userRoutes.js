@@ -6,7 +6,7 @@ const adminAuth = require('../middleware/adminAuth');
 
 
 
-
+ 
 const userRoutes = express.Router();
 
 userRoutes.get("/getcurrentuser",isAuth,getCurrentUser)

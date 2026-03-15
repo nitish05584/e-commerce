@@ -5,6 +5,10 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import AuthContext from './context/AuthContext.jsx'
 import UserContext from './context/UserContext.jsx'
+import axios from 'axios'
+
+// Configure axios to always send credentials
+axios.defaults.withCredentials = true
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
