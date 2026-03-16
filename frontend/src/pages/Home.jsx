@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Background from '../component/Background';
 import Hero from '../component/Hero';
+import Product from './Product';
 
 
 const Home = () => {
@@ -28,6 +29,7 @@ const Home = () => {
       />
      
     </div>
+    <Product/>
     </div>
   )
 }
