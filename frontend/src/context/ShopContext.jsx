@@ -22,6 +22,7 @@ const ShopContext = ({children}) => {
       console.log(result.data)
 
       setProducts(result.data)
+     
       
     } catch (error) {
       console.log(error)

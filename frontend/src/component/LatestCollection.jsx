@@ -26,7 +26,7 @@ const LatestCollection = () => {
     </div>
 
 
-    <div className='w-[100%] h-[50%] mt-[30%] flex items-center justify-enter flex-wrap gap-[50px]'>
+    <div className='w-[100%] h-[50%] mt-[3%] flex items-center justify-enter flex-wrap gap-[50px]'>
       {
         latestProducts.map((item,index)=>(
         <Card key={index} name={item.name} image={item.image1} id={item._id} price={item.price}/>
