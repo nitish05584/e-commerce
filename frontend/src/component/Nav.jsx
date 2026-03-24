@@ -74,7 +74,7 @@ function Nav() {
       </div>
 
       {showSearch && <div className='w-[100%] h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 right-0 flex items-center justify-center'>
-       <input type="text" className='lg:w-[50%] w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-[50px] placeholder:text-white text-[white] text-[18px 'placeholder='Search here' />
+       <input type="text" className='lg:w-[50%] w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-[50px] placeholder:text-white text-[white] text-[18px 'placeholder='Search here' onChange={(e)=>{setSearch(e.target.value)}} value={search} />
       </div>}
 
 

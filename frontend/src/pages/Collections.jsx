@@ -10,7 +10,7 @@ import Card from '../component/Card';
 const Collections = () => {
   let [showFilter, setShowFilter] = useState(false)
 
-  let {products}=useContext(shopDataContext)
+  let {products,search,showSearch}=useContext(shopDataContext)
 
   let [filterProduct,setFilterProduct]=useState([])
 
@@ -38,6 +38,12 @@ const Collections = () => {
 
    const applyFilter=(e)=>{
     let productCopy=products.slice()
+
+    if(showSearch && search){
+     productCopy=productCopy.filter(item=>item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
+
     if(category.length>0){
       productCopy=productCopy.filter(item=>category.includes(item.category))
     }
@@ -78,8 +84,8 @@ const Collections = () => {
 
    
    useEffect(()=>{
-applyFilter()
-   },[category,subCategory])
+   applyFilter()
+   },[category,subCategory,search,showSearch])
 
 
   return (
