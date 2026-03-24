@@ -15,13 +15,15 @@ import { IoMdHome } from "react-icons/io";
 import { HiOutlineCollection } from "react-icons/hi";
 
 import { MdContacts } from "react-icons/md";
+import { shopDataContext } from '../context/ShopContext';
 
 
 function Nav() {
   let navigate=useNavigate()
   let {getCurrentUser,userData}=useContext(userDataContext)
   let {serverUrl}=useContext(authDataContext)
-  let [showSearch,setShowSearch]=useState(false)
+
+  let {showSearch,setShowSearch,search,setSearch}=useContext(shopDataContext)
    let [showProfile,setShowProfile]=useState(false)
 
    const handleLogout=async()=>{
@@ -57,7 +59,7 @@ function Nav() {
 
       <div className='w-[30%] flex items-center justify-end gap-[20px]'>
 
-         {!showSearch && <IoSearchCircleOutline className='w-[38px] h-[38px] text-[#000000] cursor-pointer'onClick={()=>setShowSearch(prev=>!prev)} />
+         {!showSearch && <IoSearchCircleOutline className='w-[38px] h-[38px] text-[#000000] cursor-pointer'onClick={()=>{setShowSearch(prev=>!prev);navigate("/collection")}} />
 }
            {showSearch &&  <IoSearchCircleSharp className='w-[38px] h-[38px] text-[#000000] cursor-pointer'onClick={()=>setShowSearch(prev=>!prev)} />}
 

@@ -9,6 +9,11 @@ import axios from 'axios'
 export const shopDataContext=createContext()
 const ShopContext = ({children}) => {
   let [products,setProducts]=useState([])
+
+  let [search,setSearch]=useState('')
+
+  let [showSearch,setShowSearch]=useState(false)
+
   let {serverUrl}=useContext(authDataContext)
   
   let currency='₹';
@@ -33,7 +38,9 @@ const ShopContext = ({children}) => {
   },[])
 
     let value={
-        products,currency,delivery_fee,getProducts
+        products,currency,delivery_fee,getProducts,
+        search,setSearch,
+        showSearch,setShowSearch
     }
   return (
     <div>
