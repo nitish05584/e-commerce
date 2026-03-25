@@ -3,6 +3,8 @@ import Background from '../component/Background';
 import Hero from '../component/Hero';
 import Product from './Product';
 import OurPolicy from '../component/OurPolicy';
+import NewLetterBox from '../component/NewLetterBox';
+import Footer from '../component/Footer';
 
 
 const Home = () => {
@@ -32,6 +34,8 @@ const Home = () => {
     </div>
     <Product/>
     <OurPolicy/>
+    <NewLetterBox/>
+    <Footer/>
     </div>
   )
 }
