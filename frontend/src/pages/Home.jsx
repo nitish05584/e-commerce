@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Background from '../component/Background';
 import Hero from '../component/Hero';
 import Product from './Product';
+import OurPolicy from '../component/OurPolicy';
 
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
      
     </div>
     <Product/>
+    <OurPolicy/>
     </div>
   )
 }
