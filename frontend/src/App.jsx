@@ -9,6 +9,7 @@ import About from './pages/About'
 import Collections from './pages/Collections'
 import Product from './pages/Product'
 import Contact from './pages/Contact'
+import ProductDetail from './pages/ProductDetail'
 
 
 const App = () => {
@@ -34,6 +35,9 @@ const App = () => {
           <Route path='/product' element={userData ? <Product/>:<Navigate to="/login" state={{from:location.pathname}}/>} />
 
           <Route path='/contact' element={userData ? <Contact/>:<Navigate to="/login" state={{from:location.pathname}}/>} />
+
+
+           <Route path='/productdetail/:productId' element={userData ? <ProductDetail/>:<Navigate to="/login" state={{from:location.pathname}}/>} />
         
       </Routes>
     </>
