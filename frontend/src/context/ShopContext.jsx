@@ -35,7 +35,7 @@ const ShopContext = ({children}) => {
     }
   }
 
-  const addToCart=async(itemId,size)=>{
+  const addtoCart=async(itemId,size)=>{
    if(!size){
     console.log("select Product Size");
     return;
@@ -53,6 +53,23 @@ const ShopContext = ({children}) => {
     
    }
    setCartItem(cartData);
+   console.log(cartData)
+  }
+
+  const getCartCount=()=>{
+    let totalCount=0;
+    for(const items in cartItem){
+      for(const item in cartItem[items]){
+        try{
+          if(cartItem[items][item]>0){
+            totalCount +=cartItem[items][item]
+          }
+        }catch(error){
+
+        }
+      }
+    }
+    return totalCount
   }
   useEffect(()=>{
     getProducts()
@@ -61,7 +78,9 @@ const ShopContext = ({children}) => {
     let value={
         products,currency,delivery_fee,getProducts,
         search,setSearch,
-        showSearch,setShowSearch
+        showSearch,setShowSearch,
+        cartItem,addtoCart,
+        getCartCount,setCartItem
     }
   return (
     <div>

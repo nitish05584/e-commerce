@@ -10,7 +10,7 @@ import RelatedProduct from '../component/RelatedProduct';
 
 const ProductDetail = () => {
     let { productId } = useParams()
-    let { products, currency } = useContext(shopDataContext)
+    let { products, currency,addtoCart } = useContext(shopDataContext)
 
     let [productData, setProductData] = useState(false)
 
@@ -99,7 +99,7 @@ const ProductDetail = () => {
                                 <button key={index} className={`border py-2 px-4 bg-slate-300 rounded-md ${item===size ? 'bg-black text-[red] text-4xl' : ''}`} onClick={()=>setSize(item)}>{item}</button>
                             ))}
                         </div>
-                        <button className='text-[16px] active:bg-slate-500 cursor-pointer bg-[#495b61c9] py-[10px] px-[20px] rounded-2xl mt-[10px] border-[#80808049] text-white shadow-md shadow-black '>Add to Cart</button>
+                        <button className='text-[16px] active:bg-slate-500 cursor-pointer bg-[#495b61c9] py-[10px] px-[20px] rounded-2xl mt-[10px] border-[#80808049] text-white shadow-md shadow-black ' onClick={()=>addtoCart(productData._id,size)}>Add to Cart</button>
                        </div>
                        <div className='w-[90%] h-[1px] bg-slate-700 '></div>
                        <div className='w-[80%] text-[16px] text-white '>

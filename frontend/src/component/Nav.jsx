@@ -23,7 +23,7 @@ function Nav() {
   let {getCurrentUser,userData}=useContext(userDataContext)
   let {serverUrl}=useContext(authDataContext)
 
-  let {showSearch,setShowSearch,search,setSearch}=useContext(shopDataContext)
+  let {showSearch,setShowSearch,search,setSearch,getCartCount}=useContext(shopDataContext)
    let [showProfile,setShowProfile]=useState(false)
 
    const handleLogout=async()=>{
@@ -70,7 +70,7 @@ function Nav() {
       {userData && <div className='w-[30px] h-[30px] bg-[#080808] text-[white] rounded-full flex items-center justify-center cursor-pointer' onClick={()=>setShowProfile(prev=>!prev)}>{userData?.name.slice(0,1)}</div>}
 
          <MdOutlineShoppingCart className='w-[38px] h-[38px] text-[#000000] cursor-pointer  hidden md:block' />
-         <p className='absolute w-[18px] h-[18px] items-center md:flex justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[23px] hidden md:block'>10</p>
+         <p className='absolute w-[18px] h-[18px] items-center md:flex justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[23px] hidden md:block'>{getCartCount()}</p>
       </div>
 
       {showSearch && <div className='w-[100%] h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 right-0 flex items-center justify-center'>
@@ -113,7 +113,7 @@ function Nav() {
 
       <button className='text-[white] flex items-center justify-center flex-col gap-[2px]'><MdOutlineShoppingCart className='w-[25px] h-[25px] text-[white] md:hidden' />Cart</button>
 
-       <p className='absolute w-[18px] h-[18px] flex items-center  justify-center bg-white px-[5px] py-[2px] text-black rounded-full text-[9px] top-[8px] right-[13px]  font-semibold'>10</p>
+       <p className='absolute w-[18px] h-[18px] flex items-center  justify-center bg-white px-[5px] py-[2px] text-black rounded-full text-[9px] top-[8px] right-[13px]  font-semibold'>{getCartCount()}</p>
 
      </div>
 
