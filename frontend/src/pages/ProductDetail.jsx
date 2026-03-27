@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { FaStar } from "react-icons/fa";
 
 import { FaRegStarHalfStroke } from "react-icons/fa6";
+import RelatedProduct from '../component/RelatedProduct';
 
 
 const ProductDetail = () => {
@@ -117,8 +118,10 @@ const ProductDetail = () => {
              </div>
 
              <div className='w-[80%] md-h-[150px] h-[220px] bg-[#3336397c] border text-white text-[13px] md:text-[15px] lg:text-[20px] px-[10px] md:px-[30px] lg:ml-[100px] ml-[20px] '>
-                <p className=''></p>
+                <p className='w-[95%] h-[90%] flex items-center justify-center '> Upgrade your wardrobe with this stylish slim-fit cotton shirt, available now on Onecart. Crafted from breathable high-quantity fabric, it offers all-day comfort andd effortless style, Easy to maintain and project for anynsetting, this shirt is a must-have essential for those who value both fashion and function .</p>
              </div>
+
+             <RelatedProduct category={productData.category} subCategory={productData.subCategory} currentProductId={productData._id} />
             </div>
         </div>
     ) : (

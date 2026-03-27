@@ -13,6 +13,7 @@ const ShopContext = ({children}) => {
   let [search,setSearch]=useState('')
 
   let [showSearch,setShowSearch]=useState(false)
+   let [cartItem,setCartItem]=useState({})
 
   let {serverUrl}=useContext(authDataContext)
   
@@ -32,6 +33,26 @@ const ShopContext = ({children}) => {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const addToCart=async(itemId,size)=>{
+   if(!size){
+    console.log("select Product Size");
+    return;
+   }
+   let cartData=structuredClone(cartItem);
+   if(cartData[itemId]){
+    if(cartData[itemId][size]){
+      cartData[itemId][size] +=1;
+    }else{
+      cartData[itemId][size]=1;
+    }
+   }else{
+    cartData[itemId]={};
+    cartData[itemId][size]=1;
+    
+   }
+   setCartItem(cartData);
   }
   useEffect(()=>{
     getProducts()
