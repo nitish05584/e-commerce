@@ -14,6 +14,7 @@ const authRouter = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 
 
@@ -50,6 +51,7 @@ app.use('/api/user',userRoutes)
 
 app.use('/api/product',productRoutes)
 
+app.use('/api/cart',cartRoutes)
 
 
 const port = process.env.port || 8080;

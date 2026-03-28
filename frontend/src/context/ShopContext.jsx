@@ -5,6 +5,8 @@ import { createContext } from 'react'
 import { authDataContext } from './AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { userDataContext } from './UserContext'
+
 
 export const shopDataContext=createContext()
 const ShopContext = ({children}) => {
@@ -16,6 +18,8 @@ const ShopContext = ({children}) => {
    let [cartItem,setCartItem]=useState({})
 
   let {serverUrl}=useContext(authDataContext)
+
+  let {userData}=useContext(userDataContext)
   
   let currency='₹';
 
@@ -53,8 +57,43 @@ const ShopContext = ({children}) => {
     
    }
    setCartItem(cartData);
-   console.log(cartData)
+    
+     if(userData){
+    try {
+     let result= await axios.post(serverUrl + '/api/cart/add',{itemId,size},{withCredentials:true})
+
+     console.log(result.data)
+     
+    } catch (error) {
+      console.log(error)
+      
+    }
   }
+  }
+
+
+   const getUserCart=async()=>{
+    try {
+      const result=await axios.post(serverUrl + '/api/cart/get',{},{withCredentials:true})
+      setCartItem(result.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const UpdateQuantity=async(itemId,size,quantity)=>{
+    let cartData=structuredClone(cartItem);
+    cartData[itemId][size]=quantity
+    setCartItem(cartData)
+
+    if(userData){
+    try {
+     await axios.post(serverUrl + "/api/cart/update",{itemid,size,quantity},{withCredentials:true}) 
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
   const getCartCount=()=>{
     let totalCount=0;
@@ -71,16 +110,41 @@ const ShopContext = ({children}) => {
     }
     return totalCount
   }
+
+
+  const getCartAmount=async()=>{
+    let totalAmount=0;
+    for(const items in cartItem){
+      let itemInfo=products.find((product)=>product._id===items);
+      for(const item in cartItem[items]){ 
+    try {
+      if(cartItem[items][item]>0){
+        totalAmount +=itemInfo.price*cartItem[items][item];
+      }
+      
+    } catch (error) {
+      
+    }
+    }
+    }
+    return totalAmount
+  }
   useEffect(()=>{
     getProducts()
   },[])
+
+  useEffect(()=>{
+    getUserCart()
+  },[])
+
+  
 
     let value={
         products,currency,delivery_fee,getProducts,
         search,setSearch,
         showSearch,setShowSearch,
         cartItem,addtoCart,
-        getCartCount,setCartItem
+        getCartCount,setCartItem,UpdateQuantity,getCartAmount
     }
   return (
     <div>

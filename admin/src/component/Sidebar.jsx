@@ -21,7 +21,7 @@ const Sidebar = () => {
 
 
 
-        <div className='flex items-center justify-center md:justify-start gap-3 border border-gray-200 border-r-0 px-3 py-2 cursor-pointer hover:bg-[#2c7b89]'onClick={()=>navigate("lists")}>
+        <div className='flex items-center justify-center md:justify-start gap-3 border border-gray-200 border-r-0 px-3 py-2 cursor-pointer hover:bg-[#2c7b89]'onClick={()=>navigate("/lists")}>
            <FaRegListAlt   className='w-[20px] h-[20px]'/>
           <p className='hidden md:block'>List Items</p>
         </div>

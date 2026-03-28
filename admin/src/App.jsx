@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Add from './pages/Add'
 import Lists from './pages/Lists'
@@ -23,6 +23,8 @@ const App = () => {
        <Route path='/orders' element={<Orders/>}/>
 
         <Route path='/login' element={<Login/>}/>
+
+        <Route path='*' element={<Navigate to='/' replace/>}/>
   
     </Routes>
     </>}
