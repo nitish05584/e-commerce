@@ -6,9 +6,12 @@ import axios from 'axios'
 import razorpay from '../assets/razorpay.png'
 import { shopDataContext } from '../context/ShopContext'
 import { authDataContext } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 function PlaceOrder() {
   let [method,setMethod]=useState('cod')
+
+  let navigate=useNavigate()
   const {cartItem,setCartItem,getCartAmount,delivery_fee,products}=useContext(shopDataContext)
   let {serverUrl}=useContext(authDataContext)
   let [formData,setFormData]=useState({
@@ -55,13 +58,19 @@ function PlaceOrder() {
           case 'cod':
           const result=await axios.post(serverUrl +'/api/order/placeorder',orderData,{withCredentials:true})
           console.log(result.data)
+          if(result.data){
           setCartItem({})
+           navigate("/order")
+         
+        }else{
+          console.log(result.data.message)
+        }
+         
           break;
           default: 
           break;
-        }
         
-        
+      }
       } catch (error) {
        console.log(error) 
       }
