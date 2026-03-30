@@ -29,6 +29,20 @@ const placeOrder=async(req,res)=>{
 
 
 
+const userOrders=async(req,res)=>{
+    try {
+        const userId=req.userId;
+        const orders=await Order.find({userId})
+        return res.status(200).json(orders)
+    } catch (error) {
+        return res.status(500).json({message:"error fetching user orders"})
+    }
+}
+
+
+
+
 module.exports={
-    placeOrder
+    placeOrder,
+    userOrders
 }
