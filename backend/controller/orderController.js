@@ -37,12 +37,39 @@ const userOrders=async(req,res)=>{
     } catch (error) {
         return res.status(500).json({message:"error fetching user orders"})
     }
+
 }
 
+
+
+const allOrders=async(req,res)=>{
+    try {
+   const orders=await Order.find({})
+   return res.status(200).json(orders)  
+
+        
+    } catch (error) {
+      console.log(error)    
+        return res.status(500).json({message:"admin fetching all orders error"})  
+    }
+}
+
+const updateStatus=async(req,res)=>{
+    try {
+        const {orderId,status}=req.body;
+        await Order.findByIdAndUpdate(orderId,{status})
+        return res.status(200).json({message:"order status updated successfully"})
+    } catch (error) {
+        return res.status(500).json({message:"error updating order status"})
+    }
+}
+ 
 
 
 
 module.exports={
     placeOrder,
-    userOrders
+    userOrders,
+    allOrders,
+    updateStatus
 }

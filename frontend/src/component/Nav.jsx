@@ -88,7 +88,7 @@ function Nav() {
 
          {userData &&<li className='w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer'onClick={()=>{handleLogout(); setShowProfile(false)}}>Logout</li>}
 
-         <li className='w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer'>Orders</li>
+         <li className='w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={()=>navigate("/order")}>Orders</li>
 
          <li className='w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer'onClick={()=>navigate("/about")}>About</li>
 
