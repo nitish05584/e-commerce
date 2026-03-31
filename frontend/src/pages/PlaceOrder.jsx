@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 function PlaceOrder() {
   let [method,setMethod]=useState('cod')
+  const [apiError,setApiError]=useState('')
 
   let navigate=useNavigate()
   const {cartItem,setCartItem,getCartAmount,delivery_fee,products}=useContext(shopDataContext)
@@ -32,8 +33,59 @@ function PlaceOrder() {
     setFormData(data=>({...data,[name]:value}))
   }
 
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      if (window.Razorpay) return resolve(true)
+      const script = document.createElement('script')
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js'
+      script.async = true
+      script.onload = () => resolve(true)
+      script.onerror = () => resolve(false)
+      document.body.appendChild(script)
+    })
+
+  const initPay=async(order)=>{
+    setApiError('')
+    const ok = await loadRazorpayScript()
+    if (!ok) {
+      setApiError('Razorpay SDK load failed')
+      return
+    }
+
+    const key =
+      order?.key ||
+      import.meta.env.VITE_RAZORPAY_KEY_ID
+
+    if (!key) {
+      setApiError('Razorpay key missing in frontend env')
+      return
+    }
+
+    const options={
+      key,
+      amount:order.amount,
+      currency:order.currency || 'INR',
+      name:'Order Payment',
+      description:'Order Payment',
+      order_id:order.id,
+      receipt:order.receipt,
+      handler: async (response) => {
+        console.log('payment success:', response)
+        setCartItem({})
+        navigate("/order")
+      }
+    }
+
+    const rzp=new window.Razorpay(options)
+    rzp.on('payment.failed', (resp) => {
+      setApiError(resp?.error?.description || 'Payment failed')
+    })
+    rzp.open()
+  }
+
    const onSubmitHandler=async(e)=>{
       e.preventDefault()
+      setApiError('')
 
       try {
         let orderItems=[]
@@ -52,7 +104,7 @@ function PlaceOrder() {
         let orderData={
           address:formData,
            items:orderItems,
-           amount:getCartAmount()+delivery_fee
+           amount:Number(getCartAmount()) + Number(delivery_fee)
         }
         switch(method){
           case 'cod':
@@ -67,6 +119,21 @@ function PlaceOrder() {
         }
          
           break;
+
+          case 'razorpay': {
+            const resultRazorpay=await axios.post(
+              serverUrl + "/api/order/razorpay",
+              orderData,
+              {withCredentials:true}
+            )
+            if(resultRazorpay?.data?.id){
+              await initPay(resultRazorpay.data)
+            } else {
+              setApiError(resultRazorpay?.data?.message || 'Razorpay order create failed')
+            }
+            break
+          }
+
           default: 
           break;
         
